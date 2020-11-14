@@ -6,4 +6,14 @@
     <string name="lbl_remember_me">Remember me</string>
     <string name="lbl_txt_not_acount">Do not have account?</string>
     <string name="lbl_create">Create</string>
+
+    <string name="lbl_teacher">Teacher</string>
+    <string name="lbl_student">Student</string>
+    <string name="lbl_register">Register</string>
+
+    <string name="lbl_err_username">Invalid username</string>
+    <string name="lbl_err_password">Invalid password</string>
+    <string name="lbl_err_email">Invalid email</string>
+    <string name="lbl_err_phone">Invalid phone</string>
+
 </resources>

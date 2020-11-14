@@ -2,4 +2,6 @@
 <resources>
     <dimen name="font_size_16">16sp</dimen>
     <dimen name="font_size_35">35sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
 </resources>

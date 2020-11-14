@@ -24,7 +24,7 @@ public class Validations {
         Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
-        if (matcher.matches())
+        if (!matcher.matches() && email.isEmpty())
             return true;
         else
             return false;
@@ -36,7 +36,7 @@ public class Validations {
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
-        if (matcher.matches())
+        if (!matcher.matches() && password.isEmpty())
             return true;
         else
             return false;
