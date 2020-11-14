@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Quan Ly Sinh Vien</string>
+    <string name="lbl_login">Login</string>
+    <string name="lbl_user_name">UserName</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_remember_me">Remember me</string>
+    <string name="lbl_txt_not_acount">Do not have account?</string>
+    <string name="lbl_create">Create</string>
+
+    <string name="lbl_teacher">Teacher</string>
+    <string name="lbl_student">Student</string>
+    <string name="lbl_register">Register</string>
+
+    <string name="lbl_err_username">Invalid username</string>
+    <string name="lbl_err_password">Invalid password</string>
+    <string name="lbl_err_email">Invalid email</string>
+    <string name="lbl_err_phone">Invalid phone</string>
+    
+    <string name="lbl_revenue">Revenue</string>
+    <string name="lbl_expenses">Expenses</string>
+    <string name="lbl_statistical">Statistical</string>
+
+</resources>

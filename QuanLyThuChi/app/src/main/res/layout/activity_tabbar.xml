@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerlayout"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/h383737"
+        android:padding="5dp"
+        android:id="@+id/relative"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            android:text="Quản lý thu chi"
+            android:textStyle="bold"
+            android:id="@+id/txt1"
+            android:textColor="@color/hfff"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/img_shar"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_share"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_rating"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/img_shar"/>
+
+        <com.google.android.material.tabs.TabLayout
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/hfff"
+            android:layout_below="@+id/txt1"
+            android:layout_marginTop="15dp"
+            app:tabTextColor="@color/hfff"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+            android:layout_width="match_parent"
+            app:tabIndicatorColor="@color/hfff"
+            app:tabIndicatorHeight="2dp"
+            android:id="@+id/tab_layout"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relative"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager" />
+
+</RelativeLayout>
