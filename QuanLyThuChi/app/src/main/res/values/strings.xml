@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quan Ly Sinh Vien</string>
+    <string name="app_name">Quan Ly Thu Chi</string>
     <string name="lbl_login">Login</string>
     <string name="lbl_user_name">UserName</string>
     <string name="lbl_password">Password</string>

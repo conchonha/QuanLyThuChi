@@ -11,6 +11,7 @@ import com.example.baseprojectandroid.R;
 public class Helpers {
     public static Dialog showLoadingDialog(Activity activity){
         Dialog dialog = new Dialog(activity);
+        dialog.setCancelable(false);
         dialog.setContentView(R.layout.layout_loading_dialog);
         return dialog;
     }

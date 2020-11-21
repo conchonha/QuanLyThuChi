@@ -29,8 +29,8 @@ public class TabbarAdapter extends FragmentStatePagerAdapter {
 
         //add fragment tuong ứng
         mListFragment.add(new FragmentRevenue());
-        mListFragment.add(new FragmentStatistical());
         mListFragment.add(new FragmentExpenses());
+        mListFragment.add(new FragmentStatistical());
     }
 
     @NonNull

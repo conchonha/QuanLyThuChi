@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.baseprojectandroid.R;
-import com.example.baseprojectandroid.src.page.login_activity.LoginActivity;
+import com.example.baseprojectandroid.src.page.tabbar_activity.TabBarActivity;
 
 
 public class Fragment_Slider3 extends Fragment {
@@ -32,7 +32,7 @@ public class Fragment_Slider3 extends Fragment {
         mBtnGetStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                startActivity(new Intent(getContext(), TabBarActivity.class));
                 getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
                 getActivity().finish();
             }

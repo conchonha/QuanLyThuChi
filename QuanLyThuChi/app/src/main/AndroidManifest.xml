@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.baseprojectandroid">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".src.page.tabbar_activity.TabBarActivity"></activity>
-        <activity android:name=".src.page.register_activity.RegisterActivity" />
-        <activity android:name=".src.page.login_activity.LoginActivity" />
+        <activity android:name=".src.page.tabbar_activity.TabBarActivity"/>
         <activity android:name=".src.page.introduce_activity.IntroduceActivity" />
         <activity android:name=".src.page.splash_activity.splash_activity">
             <intent-filter>
