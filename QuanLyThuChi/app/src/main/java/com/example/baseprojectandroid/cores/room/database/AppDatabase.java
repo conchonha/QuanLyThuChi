@@ -7,10 +7,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.baseprojectandroid.cores.room.dao.EevenueExpenditureDao;
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.utils.Constain;
 
-@Database(entities = {EevenueExpenditure.class}, version = 1)
+@Database(entities = {RevenueExpenditureTable.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase mInstance;
 

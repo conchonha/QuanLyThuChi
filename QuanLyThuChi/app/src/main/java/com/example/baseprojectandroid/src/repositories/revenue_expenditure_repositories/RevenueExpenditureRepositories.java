@@ -10,7 +10,7 @@ import com.example.baseprojectandroid.async.InsertEvenueExpenditureAsyncTask;
 import com.example.baseprojectandroid.async.UpdateEvenueExpenditureAsyncTask;
 import com.example.baseprojectandroid.cores.room.dao.EevenueExpenditureDao;
 import com.example.baseprojectandroid.cores.room.database.AppDatabase;
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RevenueExpenditureRepositories {
     private List<SpinnerModel> mListSpiner = new ArrayList<>();
-    private LiveData<List<EevenueExpenditure>> mListAllEevenueExpenditure;
+    private LiveData<List<RevenueExpenditureTable>> mListAllEevenueExpenditure;
     private EevenueExpenditureDao mEvenueExpenditureDao;
 
     public RevenueExpenditureRepositories(Application application) {
@@ -33,19 +33,19 @@ public class RevenueExpenditureRepositories {
         return listTmt;
     }
 
-    public void insert(EevenueExpenditure eevenueExpenditure) {
-        new InsertEvenueExpenditureAsyncTask(eevenueExpenditure, mEvenueExpenditureDao).execute();
+    public void insert(RevenueExpenditureTable revenueExpenditureTable) {
+        new InsertEvenueExpenditureAsyncTask(revenueExpenditureTable, mEvenueExpenditureDao).execute();
     }
 
-    public void delete(EevenueExpenditure eevenueExpenditure) {
-        new DeleteEvenueExpenditureAsyncTask(eevenueExpenditure, mEvenueExpenditureDao).execute();
+    public void delete(RevenueExpenditureTable revenueExpenditureTable) {
+        new DeleteEvenueExpenditureAsyncTask(revenueExpenditureTable, mEvenueExpenditureDao).execute();
     }
 
-    public void update(EevenueExpenditure eevenueExpenditure) {
-        new UpdateEvenueExpenditureAsyncTask(eevenueExpenditure, mEvenueExpenditureDao).execute();
+    public void update(RevenueExpenditureTable revenueExpenditureTable) {
+        new UpdateEvenueExpenditureAsyncTask(revenueExpenditureTable, mEvenueExpenditureDao).execute();
     }
 
-    public LiveData<List<EevenueExpenditure>> getAllListEevenueExpenditure(String type) {
+    public LiveData<List<RevenueExpenditureTable>> getAllListEevenueExpenditure(String type) {
         mListAllEevenueExpenditure = mEvenueExpenditureDao.getListRevenueExpenditure(type);
         return mListAllEevenueExpenditure;
     }

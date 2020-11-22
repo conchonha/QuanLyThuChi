@@ -150,6 +150,7 @@
                     android:backgroundTint="@color/h383737"
                     android:gravity="center"
                     android:text="@string/lbl_cancel"
+                    android:id="@+id/btn_cancel"
                     android:textAppearance="@style/MyStyle"
                     android:textColor="@color/hfff"
                     android:textSize="@dimen/font_size_16" />

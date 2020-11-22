@@ -7,21 +7,21 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 
 import java.util.List;
 
 @Dao
 public interface EevenueExpenditureDao {
-    @Query("SELECT * FROM EevenueExpenditure WHERE type = :strType ORDER BY mId DESC")
-    LiveData<List<EevenueExpenditure>> getListRevenueExpenditure(String strType);
+    @Query("SELECT * FROM RevenueExpenditure WHERE type = :strType ORDER BY mId DESC")
+    LiveData<List<RevenueExpenditureTable>> getListRevenueExpenditure(String strType);
 
     @Insert
-    void insert(EevenueExpenditure task);
+    void insert(RevenueExpenditureTable task);
 
     @Delete
-    void delete(EevenueExpenditure task);
+    void delete(RevenueExpenditureTable task);
 
     @Update
-    void update(EevenueExpenditure task);
+    void update(RevenueExpenditureTable task);
 }

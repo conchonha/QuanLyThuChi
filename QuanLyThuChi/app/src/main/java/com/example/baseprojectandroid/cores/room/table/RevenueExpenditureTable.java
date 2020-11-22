@@ -5,10 +5,13 @@ import androidx.room.Entity;
 
 import com.example.baseprojectandroid.cores.room.BaseObject;
 
-@Entity(tableName = "EevenueExpenditure")
-public class EevenueExpenditure extends BaseObject {
+@Entity(tableName = "RevenueExpenditure")
+public class RevenueExpenditureTable extends BaseObject {
     @ColumnInfo(name = "title")
     public String mTitle;
+
+    @ColumnInfo(name = "img")
+    public String mImage;
 
     @ColumnInfo(name = "price")
     public int mPrice;
@@ -23,14 +26,15 @@ public class EevenueExpenditure extends BaseObject {
      * Constructer
      */
 
-    public EevenueExpenditure() {
+    public RevenueExpenditureTable() {
 
     }
 
-    public EevenueExpenditure(String type, String title, int price, String content, String createTime, String updateTime) {
+    public RevenueExpenditureTable(String type, String title, String img, int price, String content, String createTime, String updateTime) {
         super(createTime, updateTime);
         this.mType = type;
         this.mTitle = title;
+        this.mImage = img;
         this.mPrice = price;
         this.mContent = content;
     }
@@ -38,6 +42,14 @@ public class EevenueExpenditure extends BaseObject {
     /*
      * Getters and Setters
      */
+
+    public String getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
 
     public String getmTitle() {
         return mTitle;

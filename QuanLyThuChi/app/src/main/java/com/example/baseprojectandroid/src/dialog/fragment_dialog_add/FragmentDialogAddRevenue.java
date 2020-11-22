@@ -18,17 +18,15 @@ import android.widget.SpinnerAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.baseprojectandroid.R;
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.callback.CallbackToDate;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
+import com.example.baseprojectandroid.utils.Constain;
 import com.example.baseprojectandroid.utils.Helpers;
-
-import java.util.List;
 
 public class FragmentDialogAddRevenue extends DialogFragment implements CallbackToDate{
     private View mView;
@@ -83,7 +81,7 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
             @Override
             public void onClick(View v) {
                 if(checkValidation()){
-                    final EevenueExpenditure model = new EevenueExpenditure(mType,spinnerModel.getmContent(),Integer.parseInt(mEdtPrice.getText().toString()),mEdtNode.getText().toString(),mEdtDateTime.getText().toString(),null);
+                    final RevenueExpenditureTable model = new RevenueExpenditureTable(mType,spinnerModel.getmContent(),spinnerModel.getmImageIcon(),Integer.parseInt(mEdtPrice.getText().toString()),mEdtNode.getText().toString(),mEdtDateTime.getText().toString(),null);
                     new AsyncTask<Void, Void, Void>() {
                         @Override
                         protected void onPreExecute() {
@@ -105,6 +103,13 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
                         }
                     }.execute();
                 }
+            }
+        });
+
+        mBtnCancal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Helpers.hideFragmentDialog(FragmentDialogAddRevenue.this, Constain.fragmentDialogRevenue);
             }
         });
     }
@@ -139,6 +144,7 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
         mImageDate = mView.findViewById(R.id.img_date);
         mEdtDateTime = mView.findViewById(R.id.edt_date_time);
         mBtnSave = mView.findViewById(R.id.btn_save);
+        mBtnCancal = mView.findViewById(R.id.btn_cancel);
         mEdtPrice = mView.findViewById(R.id.edt_price);
         mEdtNode = mView.findViewById(R.id.edt_node);
     }
@@ -147,13 +153,7 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
     private void initViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
-        //lắng nghe sự thay đổi của dữ liêu
-        mRevenueExpenditureViewmodel.getListSpinner().observe(getViewLifecycleOwner(), new Observer<List<SpinnerModel>>() {
-            @Override
-            public void onChanged(List<SpinnerModel> spinnerModels) {
 
-            }
-        });
     }
 
     @Override

@@ -5,10 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 import com.example.baseprojectandroid.src.repositories.revenue_expenditure_repositories.RevenueExpenditureRepositories;
 
@@ -28,19 +26,19 @@ public class RevenueExpenditureViewmodel extends AndroidViewModel {
         return mRevenueExpenditureRepositories.getListSpiner();
     }
 
-    public void insertEvenueExpenditure(EevenueExpenditure eevenueExpenditure){
-        mRevenueExpenditureRepositories.insert(eevenueExpenditure);
+    public void insertEvenueExpenditure(RevenueExpenditureTable revenueExpenditureTable){
+        mRevenueExpenditureRepositories.insert(revenueExpenditureTable);
     }
 
-    public void updateEvenueExpenditure(EevenueExpenditure eevenueExpenditure){
-        mRevenueExpenditureRepositories.update(eevenueExpenditure);
+    public void updateEvenueExpenditure(RevenueExpenditureTable revenueExpenditureTable){
+        mRevenueExpenditureRepositories.update(revenueExpenditureTable);
     }
 
-    public void deleteEvenueExpenditure(EevenueExpenditure eevenueExpenditure){
-        mRevenueExpenditureRepositories.delete(eevenueExpenditure);
+    public void deleteEvenueExpenditure(RevenueExpenditureTable revenueExpenditureTable){
+        mRevenueExpenditureRepositories.delete(revenueExpenditureTable);
     }
 
-    public LiveData<List<EevenueExpenditure>> getAllListEvenueExpenditure(String type){
+    public LiveData<List<RevenueExpenditureTable>> getAllListRevenueExpenditure(String type){
         return mRevenueExpenditureRepositories.getAllListEevenueExpenditure(type);
     }
 

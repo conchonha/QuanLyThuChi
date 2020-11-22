@@ -3,14 +3,14 @@ package com.example.baseprojectandroid.async;
 import android.os.AsyncTask;
 
 import com.example.baseprojectandroid.cores.room.dao.EevenueExpenditureDao;
-import com.example.baseprojectandroid.cores.room.table.EevenueExpenditure;
+import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 
 public class UpdateEvenueExpenditureAsyncTask extends AsyncTask<Void,Void,Void> {
-    private EevenueExpenditure mEvenueExpenditure;
+    private RevenueExpenditureTable mEvenueExpenditure;
     private EevenueExpenditureDao mEvenueExpenditureDao;
 
-    public UpdateEvenueExpenditureAsyncTask(EevenueExpenditure eevenueExpenditure, EevenueExpenditureDao eevenueExpenditureDao){
-        this.mEvenueExpenditure = eevenueExpenditure;
+    public UpdateEvenueExpenditureAsyncTask(RevenueExpenditureTable revenueExpenditureTable, EevenueExpenditureDao eevenueExpenditureDao){
+        this.mEvenueExpenditure = revenueExpenditureTable;
         this.mEvenueExpenditureDao = eevenueExpenditureDao;
     }
 
