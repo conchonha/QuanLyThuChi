@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Danh Mục:"
+                    android:text="@string/lbl_category"
                     android:textColor="@color/h383737"
                     android:textSize="@dimen/font_size_16"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Số tiền:"
+                    android:text="@string/lbl_date"
                     android:textColor="@color/h383737"
                     android:textSize="@dimen/font_size_16"
                     android:textStyle="bold" />
@@ -60,7 +60,40 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="nhập"
+                    android:hint="@string/lbl_enter_infomation"
+                    android:backgroundTint="@color/h383737"
+                    android:enabled="false"
+                    android:id="@+id/edt_date_time"
+                    android:inputType="number"
+                    android:textSize="@dimen/font_size_14" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/img_date"
+                    android:src="@drawable/ic_date"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                     />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/lbl_price"
+                    android:textColor="@color/h383737"
+                    android:textSize="@dimen/font_size_16"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_enter_infomation"
+                    android:id="@+id/edt_price"
                     android:inputType="number"
                     android:textSize="@dimen/font_size_14" />
 
@@ -68,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="VND"
+                    android:text="@string/lbl_vnd"
                     android:textSize="@dimen/font_size_16" />
             </TableRow>
 
@@ -78,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ghi chú:"
+                    android:text="@string/lbl_note"
                     android:textColor="@color/h383737"
                     android:textSize="@dimen/font_size_16"
                     android:textStyle="bold" />
@@ -86,7 +119,8 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="nhập chi tiết"
+                    android:hint="@string/lbl_enter_infomation"
+                    android:id="@+id/edt_node"
                     android:inputType="text"
                     android:textSize="@dimen/font_size_14" />
 
@@ -104,7 +138,8 @@
                     android:layout_height="40dp"
                     android:backgroundTint="@color/h383737"
                     android:gravity="center"
-                    android:text="Lưu"
+                    android:text="@string/lbl_save"
+                    android:id="@+id/btn_save"
                     android:textAppearance="@style/MyStyle"
                     android:textColor="@color/hfff"
                     android:textSize="@dimen/font_size_16" />
@@ -114,7 +149,7 @@
                     android:layout_height="40dp"
                     android:backgroundTint="@color/h383737"
                     android:gravity="center"
-                    android:text="Huỷ"
+                    android:text="@string/lbl_cancel"
                     android:textAppearance="@style/MyStyle"
                     android:textColor="@color/hfff"
                     android:textSize="@dimen/font_size_16" />

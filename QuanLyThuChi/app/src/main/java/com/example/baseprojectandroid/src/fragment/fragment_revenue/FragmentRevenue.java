@@ -10,9 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.baseprojectandroid.R;
+import com.example.baseprojectandroid.models.callback.CallbackToDate;
 import com.example.baseprojectandroid.src.dialog.fragment_dialog_add.FragmentDialogAddRevenue;
 import com.example.baseprojectandroid.src.fragment.fragment_statistical.FragmentStatistical;
 import com.example.baseprojectandroid.utils.Constain;
+import com.example.baseprojectandroid.utils.Helpers;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FragmentRevenue extends Fragment {
@@ -34,7 +36,9 @@ public class FragmentRevenue extends Fragment {
         mFabRevenue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentDialogAddRevenue   = new FragmentDialogAddRevenue();
+                mFragmentDialogAddRevenue = new FragmentDialogAddRevenue();
+                CallbackToDate callbackToDate = mFragmentDialogAddRevenue;
+                callbackToDate.getTitleDialog(getString(R.string.lbl_revenue));
                 mFragmentDialogAddRevenue.setCancelable(false);
                 mFragmentDialogAddRevenue.show(getFragmentManager(), Constain.fragmentDialogRevenue);
             }
