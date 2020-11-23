@@ -10,14 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
-import com.example.baseprojectandroid.models.callback.CallbackToDate;
+import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.src.adapter.revenue_expenditure_adapter.RevenueExpenditureAdapter;
-import com.example.baseprojectandroid.src.dialog.fragment_dialog_add.FragmentDialogAddRevenue;
+import com.example.baseprojectandroid.src.dialog.FragmentDialogRevenueExpenditure;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
 import com.example.baseprojectandroid.utils.Constain;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +32,7 @@ public class FragmentExpenses extends Fragment {
     //variable
     private RevenueExpenditureAdapter mAdapter;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
-    private FragmentDialogAddRevenue mFragmentDialogAddRevenue;
+    private FragmentDialogRevenueExpenditure mFragmentDialogAddRevenueExpenditure;
 
     @Nullable
     @Override
@@ -54,9 +54,9 @@ public class FragmentExpenses extends Fragment {
     private void init() {
         //khởi tạo recyclerview
         mRecyclerViewExpenses.setHasFixedSize(true);
-        mRecyclerViewExpenses.setLayoutManager(new LinearLayoutManager(mView.getContext()));
+        mRecyclerViewExpenses.setLayoutManager(new GridLayoutManager(mView.getContext(),1));
 
-        mAdapter = new RevenueExpenditureAdapter();
+        mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         mRecyclerViewExpenses.setAdapter(mAdapter);
     }
 
@@ -69,6 +69,7 @@ public class FragmentExpenses extends Fragment {
             @Override
             public void onChanged(List<RevenueExpenditureTable> revenueExpenditureTables) {
                 mAdapter.setListEvenueExpenditure(revenueExpenditureTables);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -78,11 +79,11 @@ public class FragmentExpenses extends Fragment {
         mFabExpenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentDialogAddRevenue = new FragmentDialogAddRevenue();
-                CallbackToDate callbackToDate = mFragmentDialogAddRevenue;
-                callbackToDate.getTitleDialog(getString(R.string.lbl_expenses));
-                mFragmentDialogAddRevenue.setCancelable(false);
-                mFragmentDialogAddRevenue.show(getFragmentManager(), Constain.fragmentDialogRevenue);
+                mFragmentDialogAddRevenueExpenditure = new FragmentDialogRevenueExpenditure();
+                CallbackToRevenueExpenditure callbackToRevenueExpenditure = mFragmentDialogAddRevenueExpenditure;
+                callbackToRevenueExpenditure.getTitleDialog(getString(R.string.lbl_expenses));
+                mFragmentDialogAddRevenueExpenditure.setCancelable(false);
+                mFragmentDialogAddRevenueExpenditure.show(getFragmentManager(), Constain.fragmentDialogRevenueExpenditure);
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.baseprojectandroid.src.dialog.fragment_dialog_add;
+package com.example.baseprojectandroid.src.dialog;
 
 import android.app.Dialog;
 import android.os.AsyncTask;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,31 +23,32 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
-import com.example.baseprojectandroid.models.callback.CallbackToDate;
+import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
 import com.example.baseprojectandroid.utils.Constain;
 import com.example.baseprojectandroid.utils.Helpers;
 
-public class FragmentDialogAddRevenue extends DialogFragment implements CallbackToDate{
+public class FragmentDialogRevenueExpenditure extends DialogFragment implements CallbackToRevenueExpenditure {
     private View mView;
     private Spinner mSpinner;
     private ImageView mImageDate;
-    private EditText mEdtDateTime,mEdtNode;
-    private Button mBtnSave,mBtnCancal;
+    private EditText mEdtDateTime, mEdtNode;
+    private Button mBtnSave, mBtnCancal;
     private EditText mEdtPrice;
 
     //variable
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private SpinnerAdapter mSpinnerAdapter;
-    private  SpinnerModel spinnerModel;
+    private SpinnerModel mSpinnerModel;
     private String mType;
     private Dialog mDialog;
+    private RevenueExpenditureTable mRevenueExpenditureTable;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_dialog_add_revenue,container,false);
+        mView = inflater.inflate(R.layout.fragment_dialog_add_revenue, container, false);
         initViewModel();
         initView();
         init();
@@ -56,10 +58,11 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
 
     //lắng nghe sự kiện oclicked view
     private void listenerOnclicked() {
+        //get item spinner
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerModel  = (SpinnerModel) parent.getItemAtPosition(position);
+                mSpinnerModel = (SpinnerModel) parent.getItemAtPosition(position);
             }
 
             @Override
@@ -72,7 +75,7 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
         mImageDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helpers.showDatePickerDialog(getContext(),FragmentDialogAddRevenue.this);
+                Helpers.showDatePickerDialog(getContext(), FragmentDialogRevenueExpenditure.this);
             }
         });
 
@@ -80,8 +83,10 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkValidation()){
-                    final RevenueExpenditureTable model = new RevenueExpenditureTable(mType,spinnerModel.getmContent(),spinnerModel.getmImageIcon(),Integer.parseInt(mEdtPrice.getText().toString()),mEdtNode.getText().toString(),mEdtDateTime.getText().toString(),null);
+                if (checkValidation()) {
+                    final RevenueExpenditureTable model = new RevenueExpenditureTable(mType, mSpinnerModel.getmContent(),
+                            mSpinnerModel.getmImageIcon(), Integer.parseInt(mEdtPrice.getText().toString()),
+                            mEdtNode.getText().toString(), mEdtDateTime.getText().toString(), null);
                     new AsyncTask<Void, Void, Void>() {
                         @Override
                         protected void onPreExecute() {
@@ -92,7 +97,18 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
 
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            mRevenueExpenditureViewmodel.insertEvenueExpenditure(model);
+                            if (mRevenueExpenditureTable != null) {
+                                mRevenueExpenditureTable.setmTitle(mSpinnerModel.getmContent());
+                                mRevenueExpenditureTable.setmImage(mSpinnerModel.getmImageIcon());
+                                mRevenueExpenditureTable.setmPrice(Integer.parseInt(mEdtPrice.getText().toString()));
+                                mRevenueExpenditureTable.setmContent(mEdtNode.getText().toString());
+                                mRevenueExpenditureTable.setmCreateTime(mEdtDateTime.getText().toString());
+                                //update
+                                mRevenueExpenditureViewmodel.updateEvenueExpenditure(mRevenueExpenditureTable);
+                            } else {
+                                //insert
+                                mRevenueExpenditureViewmodel.insertEvenueExpenditure(model);
+                            }
                             return null;
                         }
 
@@ -100,29 +116,31 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
                         protected void onPostExecute(Void aVoid) {
                             super.onPostExecute(aVoid);
                             mDialog.dismiss();
+                            Helpers.hideFragmentDialog(FragmentDialogRevenueExpenditure.this, Constain.fragmentDialogRevenueExpenditure);
                         }
                     }.execute();
                 }
             }
         });
 
+        //thoát dialog
         mBtnCancal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Helpers.hideFragmentDialog(FragmentDialogAddRevenue.this, Constain.fragmentDialogRevenue);
+                Helpers.hideFragmentDialog(FragmentDialogRevenueExpenditure.this, Constain.fragmentDialogRevenueExpenditure);
             }
         });
     }
 
     //check validation
-    private boolean checkValidation(){
-        if(mEdtPrice.getText().toString().equals("")){
+    private boolean checkValidation() {
+        if (mEdtPrice.getText().toString().equals("")) {
             mEdtPrice.setError(getString(R.string.lbl_not_null_data));
-            return  false;
+            return false;
         }
         mEdtPrice.setError(null);
 
-        if(mEdtNode.getText().toString().equals("")){
+        if (mEdtNode.getText().toString().equals("")) {
             mEdtNode.setError(getString(R.string.lbl_not_null_data));
             return false;
         }
@@ -135,7 +153,23 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
         mSpinnerAdapter = new com.example.baseprojectandroid.src.adapter.spinner_adapter.SpinnerAdapter(getContext(), mRevenueExpenditureViewmodel.getListSpinner().getValue());
         mSpinner.setAdapter(mSpinnerAdapter);
 
+        //settime
         mEdtDateTime.setText(Helpers.getTime());
+
+        //set data edit
+        if (mRevenueExpenditureTable != null) {
+            mEdtPrice.setText(mRevenueExpenditureTable.getmPrice() + "");
+            mEdtDateTime.setText(mRevenueExpenditureTable.getmCreateTime());
+            mEdtNode.setText(mRevenueExpenditureTable.getmContent());
+
+            SpinnerModel spinnerModel = new SpinnerModel(mRevenueExpenditureTable.getmImage(), mRevenueExpenditureTable.getmTitle());
+
+            for (int i = 0; i < mRevenueExpenditureViewmodel.getListSpinner().getValue().size(); i++) {
+                if(mRevenueExpenditureViewmodel.getListSpinner().getValue().get(i).getmContent().equals(spinnerModel.getmContent())){
+                    mSpinner.setSelection(i);
+                }
+            }
+        }
     }
 
     //ánh xạ view
@@ -152,8 +186,6 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
     //khởi tạo viewmodel
     private void initViewModel() {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
-
-
     }
 
     @Override
@@ -169,6 +201,7 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
         super.onResume();
     }
 
+    //callback
     @Override
     public void getTimePickerDialog(String time) {
         mEdtDateTime.setText(time);
@@ -177,5 +210,10 @@ public class FragmentDialogAddRevenue extends DialogFragment implements Callback
     @Override
     public void getTitleDialog(String title) {
         mType = title;
+    }
+
+    @Override
+    public void getRevenueExpenditureObject(RevenueExpenditureTable revenueExpenditureTable) {
+        mRevenueExpenditureTable = revenueExpenditureTable;
     }
 }
