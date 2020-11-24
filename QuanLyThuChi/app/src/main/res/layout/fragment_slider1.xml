@@ -21,7 +21,7 @@
         android:id="@+id/txttitle"
         android:textStyle="bold"
         android:textSize="30sp"
-        android:text="Title Here"
+        android:text="@string/lbl_title_here"
         android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -30,7 +30,7 @@
         android:id="@+id/txtdescription"
         android:textAlignment="center"
         android:textSize="17sp"
-        android:text="Description is Here"
+        android:text="@string/lbl_description_here"
         android:textColor="#fff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

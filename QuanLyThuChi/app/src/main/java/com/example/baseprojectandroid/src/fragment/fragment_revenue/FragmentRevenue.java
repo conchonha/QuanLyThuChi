@@ -1,5 +1,6 @@
 package com.example.baseprojectandroid.src.fragment.fragment_revenue;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseprojectandroid.R;
+import com.example.baseprojectandroid.compoments.ItemTouchHelperSimpleCallback;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.src.adapter.revenue_expenditure_adapter.RevenueExpenditureAdapter;
@@ -34,11 +37,12 @@ public class FragmentRevenue extends Fragment {
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private RevenueExpenditureAdapter mAdapter;
     private String TAG = "FragmentRevenue";
+    private Dialog mDiaLog;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_revenue,container,false);
+        mView = inflater.inflate(R.layout.fragment_revenue, container, false);
         intViewModel();
         initView();
         init();
@@ -49,8 +53,9 @@ public class FragmentRevenue extends Fragment {
     private void init() {
         //khởi tạo recyclerview
         mRecyclerViewRevenue.setHasFixedSize(true);
-        mRecyclerViewRevenue.setLayoutManager(new GridLayoutManager(getContext(),1));
+        mRecyclerViewRevenue.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
+        //set adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         mRecyclerViewRevenue.setAdapter(mAdapter);
     }
@@ -62,9 +67,17 @@ public class FragmentRevenue extends Fragment {
         //quan sát và lắng nghe sự thay đổi của dữ liệu
         mRevenueExpenditureViewmodel.getAllListRevenueExpenditure(getString(R.string.lbl_revenue)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
-            public void onChanged(List<RevenueExpenditureTable> revenueExpenditureTables) {
+            public void onChanged(final List<RevenueExpenditureTable> revenueExpenditureTables) {
                 mAdapter.setListEvenueExpenditure(revenueExpenditureTables);
                 mAdapter.notifyDataSetChanged();
+                mRevenueExpenditureViewmodel.setmListRevenueTable(revenueExpenditureTables);
+            }
+        });
+
+        mRevenueExpenditureViewmodel.getmListRevenueTable().observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
+            @Override
+            public void onChanged(List<RevenueExpenditureTable> list) {
+                new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(list, mRevenueExpenditureViewmodel, getActivity(), mRecyclerViewRevenue)).attachToRecyclerView(mRecyclerViewRevenue);
             }
         });
     }
@@ -88,4 +101,6 @@ public class FragmentRevenue extends Fragment {
         mFabRevenue = mView.findViewById(R.id.fab_revenue);
         mRecyclerViewRevenue = mView.findViewById(R.id.recyclerview_revenue);
     }
+
+    //Swipe to Delete RecyclerView Items
 }

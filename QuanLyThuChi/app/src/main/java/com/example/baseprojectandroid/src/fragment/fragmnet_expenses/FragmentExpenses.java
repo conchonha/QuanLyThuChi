@@ -11,16 +11,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baseprojectandroid.R;
+import com.example.baseprojectandroid.compoments.ItemTouchHelperSimpleCallback;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.src.adapter.revenue_expenditure_adapter.RevenueExpenditureAdapter;
 import com.example.baseprojectandroid.src.dialog.FragmentDialogRevenueExpenditure;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
 import com.example.baseprojectandroid.utils.Constain;
+import com.example.baseprojectandroid.utils.Helpers;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -37,7 +41,7 @@ public class FragmentExpenses extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_expenses,container,false);
+        mView = inflater.inflate(R.layout.fragment_expenses, container, false);
         intViewModel();
         initView();
         init();
@@ -54,8 +58,9 @@ public class FragmentExpenses extends Fragment {
     private void init() {
         //khởi tạo recyclerview
         mRecyclerViewExpenses.setHasFixedSize(true);
-        mRecyclerViewExpenses.setLayoutManager(new GridLayoutManager(mView.getContext(),1));
+        mRecyclerViewExpenses.setLayoutManager(new GridLayoutManager(mView.getContext(), 1));
 
+        //khởi tạo adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
         mRecyclerViewExpenses.setAdapter(mAdapter);
     }
@@ -70,6 +75,15 @@ public class FragmentExpenses extends Fragment {
             public void onChanged(List<RevenueExpenditureTable> revenueExpenditureTables) {
                 mAdapter.setListEvenueExpenditure(revenueExpenditureTables);
                 mAdapter.notifyDataSetChanged();
+                mRevenueExpenditureViewmodel.setmListExpenditureTable(revenueExpenditureTables);
+            }
+        });
+
+        mRevenueExpenditureViewmodel.getmListExpenditureTable().observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
+            @Override
+            public void onChanged(List<RevenueExpenditureTable> list) {
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(list,mRevenueExpenditureViewmodel,getActivity(),mRecyclerViewExpenses));
+                itemTouchHelper.attachToRecyclerView(mRecyclerViewExpenses);
             }
         });
     }

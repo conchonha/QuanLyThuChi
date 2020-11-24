@@ -39,14 +39,74 @@
         android:layout_below="@+id/tab_layout"
         android:layout_margin="10dp"
         android:paddingTop="30dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="4dp"
         app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/h383737"
+                android:textColor="@color/hfff"
+                android:text="Tổng thu:"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hF30202"
+                android:text="555.000 VND"
+                android:layout_marginTop="5dp"
+                android:id="@+id/txt_total_revenue"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/h383737"
+                android:textColor="@color/hfff"
+                android:text="Cân Tiêu:"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hF30202"
+                android:text="555.000 VND"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:id="@+id/txt_total_expenses"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/h383737"
+                android:textColor="@color/hfff"
+                android:text="Cân đối:"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/hF30202"
+                android:text="555.000 VND"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_16"
+                android:padding="5dp"/>
 
         </LinearLayout>
 

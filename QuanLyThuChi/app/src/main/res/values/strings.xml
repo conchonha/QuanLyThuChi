@@ -15,5 +15,17 @@
     <string name="lbl_cancel">Huỷ</string>
 
     <string name="lbl_not_null_data">Vui lòng không để trông dữ liệu</string>
+    <string name="lbl_under">Quay lại</string>
+
+<!--  nội dung  slide introduce-->
+    <string name="lbl_title_here">Tiêu đề ở đây</string>
+    <string name="lbl_description_here">Mô tả ở đây</string>
+    <string name="lbl_title_fragmnet_slide_2">Tiêu đề ở đây \n Tiêu đề ở đây</string>
+    <string name="lbl_description_fragment_slide_2">Mô tả ở đây \nMô tả ở đây</string>
+    <string name="lbl_fragment_slide_3_1">Chào mừng bạn đến với ứng dụng của chúng tôi</string>
+    <string name="lbl_fragment_slide_3_2">Mô tả</string>
+    <string name="lbl_fragment_slide_3_3">Nội dung mô tả</string>
+    <string name="lbl_fragment_slide_3_4">Bắt Đầu</string>
+    <string name="lbl_fragment_slide_3_5">Các điều khoản và điều kiện</string>
 
 </resources>
