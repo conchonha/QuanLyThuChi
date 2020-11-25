@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.baseprojectandroid.R;
+import com.example.baseprojectandroid.compoments.OnItemSelectedListenner;
 import com.example.baseprojectandroid.cores.room.table.RevenueExpenditureTable;
 import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
 import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
@@ -62,15 +63,11 @@ public class FragmentDialogRevenueExpenditure extends DialogFragment implements 
     //lắng nghe sự kiện oclicked view
     private void listenerOnclicked() {
         //get item spinner
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinner.setOnItemSelectedListener(new OnItemSelectedListenner() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                super.onItemSelected(parent, view, position, id);
                 mSpinnerModel = (SpinnerModel) parent.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

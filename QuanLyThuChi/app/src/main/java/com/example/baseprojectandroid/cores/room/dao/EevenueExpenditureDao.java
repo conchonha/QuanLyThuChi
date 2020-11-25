@@ -16,6 +16,9 @@ public interface EevenueExpenditureDao {
     @Query("SELECT * FROM RevenueExpenditure WHERE type = :strType ORDER BY mId DESC")
     LiveData<List<RevenueExpenditureTable>> getListRevenueExpenditure(String strType);
 
+    @Query("SELECT * FROM RevenueExpenditure")
+    LiveData<List<RevenueExpenditureTable>> getAllListRevenueExpenditure();
+
     @Insert
     void insert(RevenueExpenditureTable task);
 

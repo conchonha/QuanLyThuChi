@@ -5,14 +5,12 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.baseprojectandroid.R;
 import com.example.baseprojectandroid.models.callback.CallbackToRevenueExpenditure;
-import com.example.baseprojectandroid.models.spinner_model.SpinnerModel;
 
 import java.util.Calendar;
 
@@ -51,7 +49,7 @@ public class Helpers {
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                callbackToRevenueExpenditure.getTimePickerDialog(year + "-" + month + "-" + dayOfMonth);
+                callbackToRevenueExpenditure.getTimePickerDialog(year + "-" + (month + 1) + "-" + dayOfMonth);
             }
         },year,mounth,date);
         datePickerDialog.show();

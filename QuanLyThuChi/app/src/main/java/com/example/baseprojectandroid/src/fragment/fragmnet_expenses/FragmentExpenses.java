@@ -22,9 +22,7 @@ import com.example.baseprojectandroid.src.adapter.revenue_expenditure_adapter.Re
 import com.example.baseprojectandroid.src.dialog.FragmentDialogRevenueExpenditure;
 import com.example.baseprojectandroid.src.viewmodel.revenue_expenditure_viewmodel.RevenueExpenditureViewmodel;
 import com.example.baseprojectandroid.utils.Constain;
-import com.example.baseprojectandroid.utils.Helpers;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -37,6 +35,7 @@ public class FragmentExpenses extends Fragment {
     private RevenueExpenditureAdapter mAdapter;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private FragmentDialogRevenueExpenditure mFragmentDialogAddRevenueExpenditure;
+    private String TAG = "FragmentExpenses";
 
     @Nullable
     @Override
@@ -62,6 +61,8 @@ public class FragmentExpenses extends Fragment {
 
         //khởi tạo adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(FragmentExpenses.this,getString(R.string.lbl_expenses),mRevenueExpenditureViewmodel,getActivity(),mRecyclerViewExpenses));
+        itemTouchHelper.attachToRecyclerView(mRecyclerViewExpenses);
         mRecyclerViewExpenses.setAdapter(mAdapter);
     }
 
@@ -70,7 +71,7 @@ public class FragmentExpenses extends Fragment {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
         //quan sát và lắng nghe sự thay đổi của dữ liệu
-        mRevenueExpenditureViewmodel.getAllListRevenueExpenditure(getString(R.string.lbl_expenses)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
+        mRevenueExpenditureViewmodel.getListRevenueExpenditure(getString(R.string.lbl_expenses)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(List<RevenueExpenditureTable> revenueExpenditureTables) {
                 mAdapter.setListEvenueExpenditure(revenueExpenditureTables);
@@ -79,13 +80,6 @@ public class FragmentExpenses extends Fragment {
             }
         });
 
-        mRevenueExpenditureViewmodel.getmListExpenditureTable().observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
-            @Override
-            public void onChanged(List<RevenueExpenditureTable> list) {
-                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(list,mRevenueExpenditureViewmodel,getActivity(),mRecyclerViewExpenses));
-                itemTouchHelper.attachToRecyclerView(mRecyclerViewExpenses);
-            }
-        });
     }
 
     //lắng nghe sự kiện onclick view

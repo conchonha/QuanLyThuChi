@@ -1,6 +1,5 @@
 package com.example.baseprojectandroid.src.fragment.fragment_revenue;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +35,6 @@ public class FragmentRevenue extends Fragment {
     private FragmentDialogRevenueExpenditure mFragmentDialogAddRevenueExpenditure;
     private RevenueExpenditureViewmodel mRevenueExpenditureViewmodel;
     private RevenueExpenditureAdapter mAdapter;
-    private String TAG = "FragmentRevenue";
-    private Dialog mDiaLog;
 
     @Nullable
     @Override
@@ -57,6 +54,7 @@ public class FragmentRevenue extends Fragment {
 
         //set adapter
         mAdapter = new RevenueExpenditureAdapter(getFragmentManager());
+        new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(FragmentRevenue.this, getString(R.string.lbl_revenue), mRevenueExpenditureViewmodel, getActivity(), mRecyclerViewRevenue)).attachToRecyclerView(mRecyclerViewRevenue);
         mRecyclerViewRevenue.setAdapter(mAdapter);
     }
 
@@ -65,7 +63,7 @@ public class FragmentRevenue extends Fragment {
         mRevenueExpenditureViewmodel = ViewModelProviders.of(getActivity()).get(RevenueExpenditureViewmodel.class);
 
         //quan sát và lắng nghe sự thay đổi của dữ liệu
-        mRevenueExpenditureViewmodel.getAllListRevenueExpenditure(getString(R.string.lbl_revenue)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
+        mRevenueExpenditureViewmodel.getListRevenueExpenditure(getString(R.string.lbl_revenue)).observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
             @Override
             public void onChanged(final List<RevenueExpenditureTable> revenueExpenditureTables) {
                 mAdapter.setListEvenueExpenditure(revenueExpenditureTables);
@@ -74,12 +72,6 @@ public class FragmentRevenue extends Fragment {
             }
         });
 
-        mRevenueExpenditureViewmodel.getmListRevenueTable().observe(getViewLifecycleOwner(), new Observer<List<RevenueExpenditureTable>>() {
-            @Override
-            public void onChanged(List<RevenueExpenditureTable> list) {
-                new ItemTouchHelper(ItemTouchHelperSimpleCallback.simpleCallBack(list, mRevenueExpenditureViewmodel, getActivity(), mRecyclerViewRevenue)).attachToRecyclerView(mRecyclerViewRevenue);
-            }
-        });
     }
 
     //lắng nghe sự kiện onclick view

@@ -18,19 +18,10 @@ import java.util.List;
 
 public class RevenueExpenditureRepositories {
     private List<SpinnerModel> mListSpiner = new ArrayList<>();
-    private LiveData<List<RevenueExpenditureTable>> mListAllEevenueExpenditure;
     private EevenueExpenditureDao mEvenueExpenditureDao;
 
     public RevenueExpenditureRepositories(Application application) {
         mEvenueExpenditureDao = AppDatabase.getInstance(application).taskEvenueExpenditureDao();
-    }
-
-    //get list spinner
-    public LiveData<List<SpinnerModel>> getListSpiner() {
-        MutableLiveData<List<SpinnerModel>> listTmt = new MutableLiveData<>();
-        addData();
-        listTmt.setValue(mListSpiner);
-        return listTmt;
     }
 
     public void insert(RevenueExpenditureTable revenueExpenditureTable) {
@@ -45,9 +36,40 @@ public class RevenueExpenditureRepositories {
         new UpdateEvenueExpenditureAsyncTask(revenueExpenditureTable, mEvenueExpenditureDao).execute();
     }
 
-    public LiveData<List<RevenueExpenditureTable>> getAllListEevenueExpenditure(String type) {
-        mListAllEevenueExpenditure = mEvenueExpenditureDao.getListRevenueExpenditure(type);
-        return mListAllEevenueExpenditure;
+    public LiveData<List<RevenueExpenditureTable>> getListEevenueExpenditure(String type) {
+        return mEvenueExpenditureDao.getListRevenueExpenditure(type);
+    }
+
+    public LiveData<List<RevenueExpenditureTable>>getmListAllEevenueExpenditure(){
+        return mEvenueExpenditureDao.getAllListRevenueExpenditure();
+    }
+
+    //get list spinner
+    public LiveData<List<SpinnerModel>> getListSpiner() {
+        MutableLiveData<List<SpinnerModel>> listTmt = new MutableLiveData<>();
+        addData();
+        listTmt.setValue(mListSpiner);
+        return listTmt;
+    }
+
+    public LiveData<List<String>>getListYear(){
+        MutableLiveData<List<String>>listMutableLiveData = new MutableLiveData<>();
+        List<String> list = new ArrayList<>();
+        for (int i = 16; i <= 30 ; i++){
+            list.add("20"+i);
+        }
+        listMutableLiveData.setValue(list);
+        return listMutableLiveData;
+    }
+
+    public LiveData<List<String>>getListMounth(){
+        MutableLiveData<List<String>>listMutableLiveData = new MutableLiveData<>();
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i <= 12 ; i++){
+            list.add(i+"");
+        }
+        listMutableLiveData.setValue(list);
+        return listMutableLiveData;
     }
 
     //add data spinner

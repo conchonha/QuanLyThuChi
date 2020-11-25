@@ -19,16 +19,19 @@
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
+            android:id="@+id/tab_all"
             android:layout_height="wrap_content"
             android:text="Tất cả" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tab_mounth"
             android:text="Tháng" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
+            android:id="@+id/tab_year"
             android:layout_height="wrap_content"
             android:text="Năm" />
     </com.google.android.material.tabs.TabLayout>
@@ -49,6 +52,50 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:id="@+id/relative_statistical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/linear_mounth"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textColor="@color/h383737"
+                        android:text="Tháng:"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/font_size_16"
+                        />
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/spinner_mounth"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textColor="@color/h383737"
+                    android:text="Year:"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/spinner_year"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_size_16"
+                    />
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/spinner_year"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -103,6 +150,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/hF30202"
                 android:text="555.000 VND"
+                android:id="@+id/txt_symmetrical"
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/font_size_16"
